@@ -6,6 +6,8 @@ Montei este dashboard para responder essas perguntas sem precisar de BI nem de b
 
 Os dados de exemplo são de um processo logístico fictício (recebimento → separação → conferência → embalagem → expedição → transporte → entrega). Coloquei um gargalo de propósito: só existe um conferente, e em outubro o volume e a reprovação na conferência aumentam. No dashboard dá para ver a fila crescer e o SLA cair de 83% para 50%.
 
+**Demo:** https://dashboard-kpis-processos.vercel.app (clique em "Usar dados de exemplo")
+
 ![Dashboard com os dados de exemplo](docs/print.jpg)
 
 ## Como rodar
