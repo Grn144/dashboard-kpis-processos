@@ -103,7 +103,7 @@ describe('parseCsv', () => {
 })
 
 describe('parseWorkbook', () => {
-  it('lê datas nativas do Excel e datas em texto', () => {
+  it('lê datas nativas do Excel e datas em texto', async () => {
     const sheet = XLSX.utils.aoa_to_sheet([
       ['Pedido_ID', 'Etapa', 'Inicio', 'Fim', 'Responsavel', 'Regiao', 'Retrabalho', 'SLA_horas'],
       ['P1', 'Separação', 46266.5, 46266.75, 'SEP-01', 'Capital SP', 'N', 24],
@@ -113,7 +113,7 @@ describe('parseWorkbook', () => {
     XLSX.utils.book_append_sheet(workbook, sheet, 'log')
     const data = XLSX.write(workbook, { type: 'array', bookType: 'xlsx' }) as ArrayBuffer
 
-    const { rows, skipped } = parseWorkbook(data)
+    const { rows, skipped } = await parseWorkbook(data)
     expect(skipped).toBe(0)
     expect(rows[0]).toMatchObject({ start: Date.UTC(2026, 8, 1, 12), end: Date.UTC(2026, 8, 1, 18) })
     expect(rows[1]).toMatchObject({ start: Date.UTC(2026, 8, 1, 18), rework: true })

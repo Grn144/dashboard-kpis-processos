@@ -1,5 +1,4 @@
 import Papa from 'papaparse'
-import * as XLSX from 'xlsx'
 
 export type StepRow = {
   orderId: string
@@ -149,7 +148,9 @@ export function parseCsv(content: string): ParseResult {
   return rowsFromTable(result.data)
 }
 
-export function parseWorkbook(data: ArrayBuffer): ParseResult {
+// o SheetJS é a maior dependência do bundle, então só é baixado quando chega um xlsx
+export async function parseWorkbook(data: ArrayBuffer): Promise<ParseResult> {
+  const XLSX = await import('xlsx')
   const workbook = XLSX.read(data, { type: 'array' })
   const sheetName = workbook.SheetNames[0]
   const sheet = sheetName ? workbook.Sheets[sheetName] : undefined
